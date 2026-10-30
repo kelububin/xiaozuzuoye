@@ -1,0 +1,19 @@
+# Local build output
+build/
+out/
+*.class
+
+# IDE settings
+.idea/
+.vscode/
+*.iml
+
+# Local settings and data
+database.properties
+mail.properties
+*.mv.db
+*.log
+.env
+.env.*
+!.env.example
+
