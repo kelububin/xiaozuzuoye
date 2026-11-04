@@ -1,19 +1,14 @@
 package com.ecshop.console;
 
 import com.ecshop.model.Product;
+import com.ecshop.service.ProductService;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 import java.util.Scanner;
 
 /** 第一周基础菜单。后续逐步接入数据库与业务模块。 */
 public class ConsoleUI {
     private final Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8);
-    private final List<Product> products = List.of(
-            new Product(1, "无线蓝牙耳机", "主动降噪，续航30小时", 299.00, 100, "数码"),
-            new Product(2, "机械键盘", "RGB背光，红轴", 459.00, 60, "数码"),
-            new Product(3, "精品咖啡豆", "中度烘焙 500g", 89.00, 200, "食品"),
-            new Product(4, "运动水杯", "大容量 1L 食品级", 49.00, 300, "生活")
-    );
+    private final ProductService productService = new ProductService();
 
     public void start() {
         System.out.println("电商平台控制台系统 第一周原型");
@@ -38,7 +33,7 @@ public class ConsoleUI {
     private void browseProducts() {
         while (true) {
             System.out.println("\n---- 示例商品列表 ----");
-            for (Product product : products) {
+            for (Product product : productService.list()) {
                 System.out.printf("[%d] %s  %.2f元  库存=%d%n",
                         product.id, product.name, product.price, product.stock);
             }
@@ -51,13 +46,7 @@ public class ConsoleUI {
                 System.out.println("请输入有效的商品编号。");
                 continue;
             }
-            Product selected = null;
-            for (Product product : products) {
-                if (product.id == id) {
-                    selected = product;
-                    break;
-                }
-            }
+            Product selected = productService.findById(id);
             if (selected == null) {
                 System.out.println("商品不存在，请重新选择。");
             } else {

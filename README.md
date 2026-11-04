@@ -34,8 +34,8 @@
 Windows 下双击 `start.bat`。也可以在项目根目录运行：
 
 ```powershell
-javac -encoding UTF-8 -d build/classes src/com/ecshop/App.java src/com/ecshop/console/ConsoleUI.java src/com/ecshop/model/Product.java
-java -Dfile.encoding=UTF-8 -Dstdin.encoding=UTF-8 -Dstdout.encoding=UTF-8 -cp build/classes com.ecshop.App
+javac -encoding UTF-8 -sourcepath src -d build/classes src/com/ecshop/App.java
+java '-Dfile.encoding=UTF-8' '-Dstdin.encoding=UTF-8' '-Dstdout.encoding=UTF-8' -cp build/classes com.ecshop.App
 ```
 
 菜单示例：
@@ -53,6 +53,7 @@ java -Dfile.encoding=UTF-8 -Dstdin.encoding=UTF-8 -Dstdout.encoding=UTF-8 -cp bu
 src/com/ecshop/App.java                 程序入口
 src/com/ecshop/console/ConsoleUI.java   控制台菜单与示例商品浏览
 src/com/ecshop/model/Product.java       商品实体
+src/com/ecshop/service/ProductService.java  示例商品列表与查询
 docs/requirements.md                   需求与八周开发计划
 docs/week01.md                         第一周工作说明
 docs/manual-checks.md                  基础操作检查清单
