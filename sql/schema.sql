@@ -58,3 +58,15 @@ INSERT INTO product (name, description, price, stock, category)
 SELECT '精品咖啡豆', '中度烘焙 500g', 89.00, 200, '食品' FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM product WHERE name = '精品咖啡豆');
 INSERT INTO product (name, description, price, stock, category)
 SELECT '运动水杯', '大容量 1L 食品级', 49.00, 300, '生活' FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM product WHERE name = '运动水杯');
+
+-- 4. 购物车表
+CREATE TABLE IF NOT EXISTS cart_item (
+    id          BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id     BIGINT NOT NULL,
+    product_id  BIGINT NOT NULL,
+    quantity    INT NOT NULL DEFAULT 1,
+    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (user_id, product_id),
+    FOREIGN KEY (user_id)    REFERENCES app_user(id),
+    FOREIGN KEY (product_id) REFERENCES product(id)
+);
